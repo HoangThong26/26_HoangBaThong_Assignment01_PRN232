@@ -1,0 +1,6 @@
+@_26_HoangBaThong_Assignment01_BackEnd_HostAddress = http://localhost:5198
+
+GET {{_26_HoangBaThong_Assignment01_BackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
