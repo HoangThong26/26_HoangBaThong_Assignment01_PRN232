@@ -1,23 +1,59 @@
 @model IEnumerable<_26_HoangBaThong_Assignment01_FrontEnd.Models.NewsArticle>
 @{ ViewData["Title"] = "Home Page"; }
-<div class="text-center mb-5">
-    <h1 class="display-4">Welcome to FUNewsManagement</h1>
-    <p>Read the latest news articles from our system.</p>
+<div class="mb-5 mt-3 text-center">
+    <h1 class="fw-bold display-5 text-primary">Latest News</h1>
+    <p class="text-muted">Catch up on the most recent stories and updates.</p>
 </div>
-<div class="row">
+<div class="row g-4">
     @foreach(var item in Model) {
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
+        <div class="col-md-4">
+            <div class="card h-100 card-hover shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">@item.NewsTitle</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@item.Headline</h6>
-                    <p class="card-text">@(item.NewsContent?.Length > 100 ? item.NewsContent.Substring(0, 100) + "..." : item.NewsContent)</p>
+                    <span class="badge bg-primary mb-2">@(item.Category?.CategoryName ?? "Uncategorized")</span>
+                    <h5 class="card-title fw-bold">@item.NewsTitle</h5>
+                    <h6 class="card-subtitle mb-3 text-muted">@item.Headline</h6>
+                    <p class="card-text text-secondary">@(item.NewsContent?.Length > 120 ? item.NewsContent.Substring(0, 120) + "..." : item.NewsContent)</p>
                 </div>
-                <div class="card-footer bg-white border-top-0">
-                    <small class="text-muted">By @(item.CreatedBy?.AccountName) in @(item.Category?.CategoryName)</small><br/>
-                    <small class="text-muted">@item.CreatedDate?.ToString("MMM dd, yyyy")</small>
+                <div class="card-footer bg-white border-top-0 pt-0">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small class="text-muted fw-bold">By @(item.CreatedBy?.AccountName)</small>
+                        <small class="text-muted">@item.CreatedDate?.ToString("MMM dd, yyyy")</small>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm w-100 rounded-pill mt-2 fw-bold" onclick="viewArticle('@(item.NewsTitle?.Replace("'", "\\'"))', '@(item.Headline?.Replace("'", "\\'"))', '@(item.NewsContent?.Replace("'", "\\'").Replace("\n", "\\n").Replace("\r", ""))', '@(item.CreatedBy?.AccountName)', '@item.CreatedDate?.ToString("MMM dd, yyyy")')">Read Full Article</button>
                 </div>
             </div>
         </div>
     }
 </div>
+
+<!-- Modal for Viewing Article -->
+<div class="modal fade" tabindex="-1" id="viewArticleModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-5 pb-5 pt-3">
+                <h2 class="fw-bold text-dark mb-2" id="viewTitle">Title</h2>
+                <h5 class="text-muted mb-4" id="viewHeadline">Headline</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                    <small class="text-primary fw-bold" id="viewAuthor">By Author</small>
+                    <small class="text-muted" id="viewDate">Date</small>
+                </div>
+                <div class="text-dark" id="viewContent" style="white-space: pre-wrap; line-height: 1.8;">Content</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewArticle(title, headline, content, author, date) {
+    document.getElementById('viewTitle').innerText = title;
+    document.getElementById('viewHeadline').innerText = headline;
+    document.getElementById('viewContent').innerText = content;
+    document.getElementById('viewAuthor').innerText = 'By ' + author;
+    document.getElementById('viewDate').innerText = date;
+    var modal = new bootstrap.Modal(document.getElementById('viewArticleModal'));
+    modal.show();
+}
+</script>

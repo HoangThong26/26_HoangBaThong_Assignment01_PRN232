@@ -28,10 +28,10 @@ namespace _26_HoangBaThong_Assignment01_FrontEnd.Controllers
                 var doc = JsonDocument.Parse(json);
                 var role = doc.RootElement.GetProperty("role").GetString();
                 HttpContext.Session.SetString("Role", role ?? "");
-                if(doc.RootElement.TryGetProperty("id", out var idProp)) HttpContext.Session.SetString("AccountId", idProp.GetInt16().ToString());
-                
+                if (doc.RootElement.TryGetProperty("id", out var idProp)) HttpContext.Session.SetString("AccountId", idProp.GetInt16().ToString());
+
                 if (role == "Admin") return RedirectToAction("Index", "SystemAccounts");
-                else if(role == "1" || role == "Staff") return RedirectToAction("Index", "NewsArticles"); else return RedirectToAction("Index", "Profile");
+                else if (role == "1" || role == "Staff") return RedirectToAction("Index", "NewsArticles"); else return RedirectToAction("Index", "Profile");
             }
             ViewBag.Error = "Invalid email or password";
             return View();

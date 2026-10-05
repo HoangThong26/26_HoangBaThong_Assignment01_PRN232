@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -18,11 +18,13 @@ namespace _26_HoangBaThong_Assignment01_FrontEnd.Controllers
             if (HttpContext.Session.GetString("Role") != "Admin") return RedirectToAction("Login", "Auth");
 
             var client = _clientFactory.CreateClient("BackendApi");
-            string query = "/odata/NewsArticles?=CreatedDate desc";
+            string query = "/odata/NewsArticles?$orderby=CreatedDate desc";
+
             if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
             {
-                query = $"/odata/NewsArticles?$filter=CreatedDate ge {startDate} and CreatedDate le {endDate}&$orderby=CreatedDate desc";
+                query = $"/odata/NewsArticles?$filter=CreatedDate ge {startDate}T00:00:00Z and CreatedDate le {endDate}T23:59:59Z&$orderby=CreatedDate desc";
             }
+
             var response = await client.GetAsync(query);
             if (response.IsSuccessStatusCode)
             {

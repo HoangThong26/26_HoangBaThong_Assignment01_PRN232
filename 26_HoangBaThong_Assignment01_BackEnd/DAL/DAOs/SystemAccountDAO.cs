@@ -1,4 +1,4 @@
-﻿using _26_HoangBaThong_Assignment01_BackEnd.DAL.Context;
+using _26_HoangBaThong_Assignment01_BackEnd.DAL.Context;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +25,8 @@ public class SystemAccountDAO
 
     public async Task<IEnumerable<SystemAccount>> GetAccountsAsync()
     {
-        using var context = new FUNewsManagementContext(); return await context.SystemAccounts.ToListAsync();
+        using var context = new FUNewsManagementContext();
+        return await context.SystemAccounts.ToListAsync();
     }
     public async Task<SystemAccount?> GetAccountByIdAsync(short id)
     {

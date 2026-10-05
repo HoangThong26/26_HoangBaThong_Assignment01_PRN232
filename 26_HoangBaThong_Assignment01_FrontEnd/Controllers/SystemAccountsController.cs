@@ -69,16 +69,16 @@ namespace _26_HoangBaThong_Assignment01_FrontEnd.Controllers
             if (!response.IsSuccessStatusCode)
             {
                 var err = await response.Content.ReadAsStringAsync();
-                try 
+                try
                 {
                     var doc = JsonDocument.Parse(err);
                     if (doc.RootElement.TryGetProperty("error", out var errorElement) && errorElement.TryGetProperty("message", out var msgElement))
                     {
                         err = msgElement.GetString();
                     }
-                } 
-                catch {}
-                if(err.Contains("<html", System.StringComparison.OrdinalIgnoreCase)) err = "An unexpected error occurred.";
+                }
+                catch { }
+                if (err.Contains("<html", System.StringComparison.OrdinalIgnoreCase)) err = "An unexpected error occurred.";
                 TempData["Error"] = "Cannot delete: " + err;
             }
             return RedirectToAction("Index");

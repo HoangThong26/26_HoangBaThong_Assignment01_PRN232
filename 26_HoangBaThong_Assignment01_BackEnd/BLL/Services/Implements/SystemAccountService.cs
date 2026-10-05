@@ -22,7 +22,7 @@ public class SystemAccountService : ISystemAccountService
     {
         var accounts = await _repository.GetAccountsAsync();
         short maxId = 0;
-        foreach(var a in accounts) if(a.AccountId > maxId) maxId = a.AccountId;
+        foreach (var a in accounts) if (a.AccountId > maxId) maxId = a.AccountId;
         account.AccountId = (short)(maxId + 1);
         await _repository.AddAccountAsync(account);
     }

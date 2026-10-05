@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
@@ -17,24 +17,16 @@ public partial class FUNewsManagementContext : DbContext
     }
 
     public virtual DbSet<Category> Categories
-    {
-        get; set;
-    }
+    { get; set; }
 
     public virtual DbSet<NewsArticle> NewsArticles
-    {
-        get; set;
-    }
+    { get; set; }
 
     public virtual DbSet<SystemAccount> SystemAccounts
-    {
-        get; set;
-    }
+    { get; set; }
 
     public virtual DbSet<Tag> Tags
-    {
-        get; set;
-    }
+    { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -145,4 +137,7 @@ public partial class FUNewsManagementContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
+
+
 

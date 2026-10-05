@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
@@ -6,41 +6,20 @@ namespace _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
 public partial class Category
 {
     [System.ComponentModel.DataAnnotations.Key]
-    public short CategoryId
-    {
-        get; set;
-    }
+    [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
+    public short CategoryId { get; set; }
 
-    public string CategoryName
-    {
-        get; set;
-    } = null!;
-    public string CategoryDesciption
-    {
-        get; set;
-    } = null!;
-    public short? ParentCategoryId
-    {
-        get; set;
-    }
+    public string CategoryName { get; set; } = null!;
+    public string CategoryDesciption { get; set; } = null!;
+    public short? ParentCategoryId { get; set; }
 
-    public bool? IsActive
-    {
-        get; set;
-    }
+    public bool? IsActive { get; set; }
 
-    public virtual ICollection<Category> InverseParentCategory
-    {
-        get; set;
-    } = new List<Category>();
-    public virtual ICollection<NewsArticle> NewsArticles
-    {
-        get; set;
-    } = new List<NewsArticle>();
-    public virtual Category? ParentCategory
-    {
-        get; set;
-    }
+    public virtual ICollection<Category> InverseParentCategory { get; set; } = new List<Category>();
+    public virtual ICollection<NewsArticle> NewsArticles { get; set; } = new List<NewsArticle>();
+    public virtual Category? ParentCategory { get; set; }
 }
+
+
 
 

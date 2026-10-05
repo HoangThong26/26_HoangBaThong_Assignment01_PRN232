@@ -30,10 +30,11 @@ static IEdmModel GetEdmModel()
     builder.EntitySet<Category>("Categories").EntityType.HasKey(c => c.CategoryId);
     builder.EntitySet<NewsArticle>("NewsArticles").EntityType.HasKey(n => n.NewsArticleId);
     builder.EntitySet<SystemAccount>("SystemAccounts").EntityType.HasKey(a => a.AccountId);
+    builder.EntitySet<Tag>("Tags").EntityType.HasKey(t => t.TagId);
     return builder.GetEdmModel();
 }
 
-builder.Services.AddControllers().AddOData(opt => opt.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).AddRouteComponents("odata", GetEdmModel()));
+builder.Services.AddControllers().AddOData(opt => opt.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).AddRouteComponents("odata", GetEdmModel())).AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles; });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,5 +56,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
 
 

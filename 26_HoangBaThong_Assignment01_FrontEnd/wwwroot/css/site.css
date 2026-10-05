@@ -1,22 +1,101 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
   margin-bottom: 60px;
 }
+
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  border-bottom: none !important;
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #2c3e50 !important;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #555 !important;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0d6efd !important;
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  border-radius: 12px;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.table-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #f1f4f8;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  border-color: #f1f4f8;
+}
+
+.btn-rounded {
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.modal-content {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 10px 15px;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.15);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #2c3e50;
+}
+

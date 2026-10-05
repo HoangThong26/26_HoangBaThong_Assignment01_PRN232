@@ -11,11 +11,13 @@ public class NewsArticleService : INewsArticleService
     public NewsArticleService(INewsArticleRepository repo) { _repo = repo; }
     public Task<IEnumerable<NewsArticle>> GetNewsArticlesAsync() => _repo.GetNewsArticlesAsync();
     public Task<NewsArticle?> GetNewsArticleByIdAsync(string id) => _repo.GetNewsArticleByIdAsync(id);
-    public async Task AddNewsArticleAsync(NewsArticle article) {
+    public async Task AddNewsArticleAsync(NewsArticle article)
+    {
         article.CreatedDate = System.DateTime.Now;
         await _repo.AddNewsArticleAsync(article);
     }
-    public async Task UpdateNewsArticleAsync(NewsArticle article) {
+    public async Task UpdateNewsArticleAsync(NewsArticle article)
+    {
         article.ModifiedDate = System.DateTime.Now;
         await _repo.UpdateNewsArticleAsync(article);
     }

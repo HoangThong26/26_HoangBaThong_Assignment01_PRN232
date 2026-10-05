@@ -1,12 +1,39 @@
-﻿@model _26_HoangBaThong_Assignment01_FrontEnd.Models.SystemAccount
+@model _26_HoangBaThong_Assignment01_FrontEnd.Models.SystemAccount
 @{ ViewData["Title"] = "My Profile"; }
-<h2>My Profile</h2>
-@if (TempData["Message"] != null) { <div class="alert alert-success">@TempData["Message"]</div> }
-<form asp-action="Edit" method="post">
-    <input type="hidden" name="AccountId" value="@Model.AccountId" />
-    <input type="hidden" name="AccountRole" value="@Model.AccountRole" />
-    <div class="mb-3"><label>Name</label><input type="text" name="AccountName" class="form-control" value="@Model.AccountName" required /></div>
-    <div class="mb-3"><label>Email</label><input type="email" name="AccountEmail" class="form-control" value="@Model.AccountEmail" required /></div>
-    <div class="mb-3"><label>Password</label><input type="password" name="AccountPassword" class="form-control" value="@Model.AccountPassword" /></div>
-    <button type="submit" class="btn btn-primary">Update Profile</button>
-</form>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
+                <h3 class="fw-bold text-center">Profile Settings</h3>
+            </div>
+            <div class="card-body p-4">
+                @if (TempData["Message"] != null) { <div class="alert alert-success rounded-3 text-center">@TempData["Message"]</div> }
+                
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" name="AccountId" value="@Model.AccountId" />
+                    <input type="hidden" name="AccountRole" value="@Model.AccountRole" />
+                    
+                    <div class="mb-4">
+                        <label class="form-label text-muted fw-bold">Full Name</label>
+                        <input type="text" name="AccountName" class="form-control form-control-lg bg-light" value="@Model.AccountName" required />
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label text-muted fw-bold">Email Address</label>
+                        <input type="email" name="AccountEmail" class="form-control form-control-lg bg-light" value="@Model.AccountEmail" required />
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label text-muted fw-bold">Password</label>
+                        <input type="password" name="AccountPassword" class="form-control form-control-lg bg-light" value="@Model.AccountPassword" />
+                    </div>
+                    
+                    <div class="d-grid mt-5">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
