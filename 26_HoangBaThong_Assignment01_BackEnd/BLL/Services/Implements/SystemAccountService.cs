@@ -1,4 +1,4 @@
-﻿using _26_HoangBaThong_Assignment01_BackEnd.BLL.Services.Interfaces;
+using _26_HoangBaThong_Assignment01_BackEnd.BLL.Services.Interfaces;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -18,7 +18,14 @@ public class SystemAccountService : ISystemAccountService
 
     public Task<IEnumerable<SystemAccount>> GetAccountsAsync() => _repository.GetAccountsAsync();
     public Task<SystemAccount?> GetAccountByIdAsync(short id) => _repository.GetAccountByIdAsync(id);
-    public Task AddAccountAsync(SystemAccount account) => _repository.AddAccountAsync(account);
+    public async Task AddAccountAsync(SystemAccount account)
+    {
+        var accounts = await _repository.GetAccountsAsync();
+        short maxId = 0;
+        foreach(var a in accounts) if(a.AccountId > maxId) maxId = a.AccountId;
+        account.AccountId = (short)(maxId + 1);
+        await _repository.AddAccountAsync(account);
+    }
     public Task UpdateAccountAsync(SystemAccount account) => _repository.UpdateAccountAsync(account);
     public async Task DeleteAccountAsync(short id)
     {

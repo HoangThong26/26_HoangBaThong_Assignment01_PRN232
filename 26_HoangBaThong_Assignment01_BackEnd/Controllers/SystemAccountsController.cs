@@ -1,4 +1,4 @@
-﻿using _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
+using _26_HoangBaThong_Assignment01_BackEnd.DAL.Entities;
 using _26_HoangBaThong_Assignment01_BackEnd.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -22,10 +22,9 @@ public class SystemAccountsController : ODataController
         return Ok(await _service.GetAccountsAsync());
     }
     [EnableQuery]
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get(short id)
+    public async Task<IActionResult> Get(short key)
     {
-        var account = await _service.GetAccountByIdAsync(id);
+        var account = await _service.GetAccountByIdAsync(key);
         if (account == null) return NotFound();
         return Ok(account);
     }
@@ -38,21 +37,19 @@ public class SystemAccountsController : ODataController
         return Created(account);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Put(short id, [FromBody] SystemAccount account)
+    public async Task<IActionResult> Put(short key, [FromBody] SystemAccount account)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-        if (id != account.AccountId) return BadRequest();
+        if (key != account.AccountId) return BadRequest();
         await _service.UpdateAccountAsync(account);
         return Updated(account);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(short id)
+    public async Task<IActionResult> Delete(short key)
     {
         try
         {
-            await _service.DeleteAccountAsync(id);
+            await _service.DeleteAccountAsync(key);
             return NoContent();
         }
         catch (System.Exception ex)

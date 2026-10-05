@@ -1,0 +1,12 @@
+﻿@model _26_HoangBaThong_Assignment01_FrontEnd.Models.SystemAccount
+@{ ViewData["Title"] = "My Profile"; }
+<h2>My Profile</h2>
+@if (TempData["Message"] != null) { <div class="alert alert-success">@TempData["Message"]</div> }
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="AccountId" value="@Model.AccountId" />
+    <input type="hidden" name="AccountRole" value="@Model.AccountRole" />
+    <div class="mb-3"><label>Name</label><input type="text" name="AccountName" class="form-control" value="@Model.AccountName" required /></div>
+    <div class="mb-3"><label>Email</label><input type="email" name="AccountEmail" class="form-control" value="@Model.AccountEmail" required /></div>
+    <div class="mb-3"><label>Password</label><input type="password" name="AccountPassword" class="form-control" value="@Model.AccountPassword" /></div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>

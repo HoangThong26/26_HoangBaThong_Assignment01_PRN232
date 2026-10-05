@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.OData;
+﻿using System.Linq;
+using Microsoft.AspNetCore.OData;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Repositories.Interfaces;
 using _26_HoangBaThong_Assignment01_BackEnd.DAL.Repositories.Implements;
 using _26_HoangBaThong_Assignment01_BackEnd.BLL.Services.Interfaces;
@@ -36,7 +37,7 @@ builder.Services.AddControllers().AddOData(opt => opt.Select().Filter().OrderBy(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()));
 
 var app = builder.Build();
 
@@ -54,4 +55,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 
